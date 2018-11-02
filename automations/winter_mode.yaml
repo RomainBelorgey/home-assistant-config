@@ -1,0 +1,33 @@
+#Winter mode on
+- id: winter modeon
+  alias: "winter mode on"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.winter_mode
+      to: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.heaters_automations
+    - delay: 00:00:02
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.run_heaters_automations
+#Winter mode off
+- id: winter modeoff
+  alias: "winter mode off"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.winter_mode
+      to: 'off'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.run_heaters_automations
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.heaters_automations
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.all_heaters
+        option: "Arret"

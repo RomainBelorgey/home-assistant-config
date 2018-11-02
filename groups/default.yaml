@@ -1,0 +1,126 @@
+default_view_test:
+  view: yes
+  icon: mdi:home
+  name: home test
+  entities:
+    - group.sensors_interior
+    - group.sensors_current_weather_1
+    - weather.weather_hourly
+    - weather.weather_daily
+    - group.heaters
+    - group.bedroom_cover
+    - group.media
+    - group.xiaomi
+    - group.washer
+    - group.window_sensors
+    - group.lights_living_room
+
+media_view:
+  view: yes
+  icon: mdi:television-classic
+  entities:
+    - group.media
+
+weather:
+  view: yes
+  icon: mdi:weather-cloudy
+  entities:
+    - weather.weather_hourly
+    - weather.weather_daily
+    - group.sensors_current_weather_1
+    - group.sensors_current_weather_2
+    - group.sensors_weather_forecast_1_day
+    - group.sensors_weather_forecast_2_day
+    - group.sensors_weather_forecast_3_day
+
+sensors_interior:
+  name: Sensors Interior
+  entities:
+    - sun.sun
+    - sensor.air_quality_livingroom
+    - sensor.humidity_livingroom
+    - sensor.temp_livingroom
+
+washer:
+  name: washer
+  entities:
+    - sensor.washer
+    - switch.switch_washer
+
+heaters_view:
+  view: yes
+  name: heaters view
+  icon: mdi:radiator
+  entities:
+    - group.heaters
+    - group.heaters_automations
+
+heaters:
+  name: Heaters
+  entities:
+    - input_boolean.winter_mode
+    - input_select.all_heaters
+    - input_select.heater_hall
+    - input_select.heater_bedroom
+    - input_select.heater_living_room
+
+heaters_automations:
+  name: Heaters automations
+  entities:
+    - automation.bedroom_morning_confort
+    - automation.bedroom_morning_back_eco
+    - automation.bedroom_evening_confort
+    - automation.bedroom_night
+    - automation.living_hall_morning_confort
+    - automation.living_hall_morning_back_eco
+    - automation.living_hall_evening_confort
+    - automation.living_hall_morning_confort_allday
+    - automation.living_hall_out_eco
+    - automation.living_hall_out_confort
+    - automation.living_hall_night
+
+heaters_scripts:
+  name: Heaters scripts
+  entities:
+    - script.heater_arret_command
+    - script.heater_confort_command
+    - script.heater_eco_command
+    - script.heater_horsgel_command
+
+media:
+  name: Media Center
+  icon: mdi:television-classic
+  entities:
+    - media_player.kodi
+    - media_player.yamaha
+    - media_player.tv
+
+xiaomi:
+  name: xiaomi
+  entities:
+    - input_boolean.automation_vacuum
+    - vacuum.xiaomi_vacuum_cleaner
+    - fan.xiaomi_miio_device
+
+automation_view:
+  name: Automation
+  icon: mdi:robot
+  view: yes
+  entities:
+    - group.all_automations
+    - group.all_scripts
+
+view_all:
+  view: yes
+  icon: mdi:alert
+  name: All devices
+  entities:
+    - group.all_switches
+    - group.all_lights
+    - group.all_devices
+    - group.all_scripts
+    - group.all_automations
+    - group.all_fans
+    - group.all_vacuum_cleaners
+    - group.calendar
+    - group.media

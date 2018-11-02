@@ -1,0 +1,37 @@
+- id: filter start
+  alias: "Filter on : working during the day"
+  trigger:
+  - platform: sun
+    event: sunrise
+  - platform: time
+    at: '07:00:00'
+  action:
+  - service: fan.turn_on
+    entity_id: fan.xiaomi_miio_device
+
+- id: filter stop
+  alias: "Filter off : working during the day"
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+  - condition: state
+    entity_id: media_player.kodi
+    state: 'off'
+  action:
+  - service: fan.turn_off
+    entity_id: fan.xiaomi_miio_device
+
+- id: filter stop after kodi
+  alias: "Filter off : after kodi"
+  trigger:
+  - platform: state
+    entity_id: media_player.kodi
+    to: 'off'
+  condition:
+  - condition: time
+    after: '23:00:00'
+    before: '07:00:00'
+  action:
+  - service: fan.turn_off
+    entity_id: fan.xiaomi_miio_device

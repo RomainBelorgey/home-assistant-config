@@ -1,0 +1,169 @@
+- id: 'close half at night'
+  alias: Cover close half at night
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+00:00:00"
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int)  == 27 }}"
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.window_set_position
+      value: 60
+
+- id: 'close at night'
+  alias: Cover close at night
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+00:30:00"
+  condition:
+    condition: state
+    entity_id: cover.bedroom_cover
+    state: open
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: 'bedroom1'
+  alias: Cover MQTT Button1 OFF (up)
+  trigger:
+  - payload: 'OFF'
+    platform: mqtt
+    topic: stat/sonoff_cover_bedroom/POWER1
+  action:
+  - service: timer.cancel
+    entity_id: timer.window_up
+
+- id: 'bedroom2'
+  alias: Cover MQTT Button2 OFF (down)
+  trigger:
+  - payload: 'OFF'
+    platform: mqtt
+    topic: stat/sonoff_cover_bedroom/POWER2
+  action:
+  - service: timer.cancel
+    entity_id: timer.window_down
+
+- id: 'bedroom3'
+  alias: Cover Timer stopped
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.window_up
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.window_down
+  action:
+  - service: cover.stop_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: 'bedroom4'
+  alias: Cover MQTT Button1 ON (up)
+  trigger:
+  - payload: 'ON'
+    platform: mqtt
+    topic: stat/sonoff_cover_bedroom/POWER1
+  condition:
+    condition: template
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.input_number.window_set_position.last_updated) > 3 }}'
+  action:
+  - service: timer.start
+    data:
+      duration: 00:00:27
+    entity_id: timer.window_up
+
+- id: 'bedroom5'
+  alias: Cover MQTT Button2 ON (down)
+  trigger:
+  - payload: 'ON'
+    platform: mqtt
+    topic: stat/sonoff_cover_bedroom/POWER2
+  condition:
+    condition: template
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.input_number.window_set_position.last_updated) > 3 }}'
+  action:
+  - service: timer.start
+    data:
+      duration: 00:00:27
+    entity_id: timer.window_down
+
+- id: 'bedroom6'
+  alias: Cover Position UP
+  trigger:
+    platform: time
+    seconds: '/1'
+  condition:
+    condition: state
+    entity_id: 'timer.window_up'
+    state: 'active'
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.window_position
+      value: >-
+        {% if (states.input_number.window_position.state | int) < 27 %}
+          {{ (states.input_number.window_position.state | int) + 1 }}
+        {% else %}
+          27 
+        {% endif %}
+
+- id: 'bedroom7'
+  alias: Cover Position Down
+  trigger:
+    platform: time
+    seconds: '/1'
+  condition:
+    condition: state
+    entity_id: 'timer.window_down'
+    state: 'active'
+  action:
+  - service: input_number.set_value
+    data_template:
+      entity_id: input_number.window_position
+      value: >-
+        {% if (states.input_number.window_position.state | int) > 1 %}
+          {{ (states.input_number.window_position.state | int) - 1 }}
+        {% else %}
+          0
+        {% endif %}
+
+- id: 'bedroom8'
+  alias: Cover Set Position Down
+  trigger:
+    platform: state
+    entity_id: input_number.window_set_position
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int) > ((((states.input_number.window_set_position.state | int ) * 27 )/100) | int) }}"
+  action:
+  - service: timer.start
+    data_template:
+      entity_id: timer.window_down
+      duration: "{{ '00:00:%02d' | format( ((states.input_number.window_position.state | int) - ((((states.input_number.window_set_position.state | int ) * 27 )/100) | int) ) | abs ) }}"
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: 'bedroom9'
+  alias: Cover Set Position UP
+  trigger:
+    platform: state
+    entity_id: input_number.window_set_position
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int) < ((((states.input_number.window_set_position.state | int ) * 27 )/100) | int) }}"
+  action:
+  - service: timer.start
+    data_template:
+      entity_id: timer.window_up
+      duration: "{{ '00:00:%02d' | format( ((states.input_number.window_position.state | int) - ((((states.input_number.window_set_position.state | int ) * 27 )/100) | int) ) | abs ) }}"
+  - service: cover.open_cover
+    data:
+      entity_id: cover.bedroom_cover

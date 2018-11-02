@@ -1,0 +1,5 @@
+lights_living_room:
+  name: Lights living room
+  entities:
+  - light.gateway_light_7c49ebb1b060
+  - switch.switch_light_rf_01

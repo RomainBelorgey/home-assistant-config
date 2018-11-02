@@ -1,0 +1,45 @@
+#Hall Heater
+- alias: Change heater status
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.heater_hall,input_select.heater_living_room,input_select.heater_bedroom
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if trigger.to_state.state == 'Eco' %}
+            script.heater_eco_command
+          {% elif trigger.to_state.state == 'Confort' %}
+            script.heater_confort_command
+          {% elif trigger.to_state.state == 'Arret' %}
+            script.heater_arret_command
+          {% else %}
+            script.heater_horsgel_command
+          {% endif %}
+        variables:
+          topic: "{{trigger.entity_id|replace('input_select.','sonoff_')}}"
+- alias: Change all heaters status
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.all_heaters
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "{{trigger.to_state.state}}"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "{{trigger.to_state.state}}"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_bedroom
+        option: "{{trigger.to_state.state}}"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.all_heaters
+        option: "N/A"

@@ -1,0 +1,61 @@
+sensors_current_weather_1:
+  name: Current weather (YR)
+  entities:
+    - sensor.current_weather_symbol
+    - sensor.current_weather_temperature
+    - sensor.current_weather_humidity
+    - sensor.current_weather_precipitation
+    - sensor.current_weather_pressure
+    - sensor.current_weather_wind_direction
+    - sensor.current_weather_wind_speed
+sensors_current_weather_2:
+  name: Current weather (Dark Sky)
+  entities:
+    - sensor.weather_forecast_temperature
+    - sensor.weather_forecast_apparent_temperature
+    - sensor.weather_forecast_humidity
+    - sensor.weather_forecast_precip_intensity
+    - sensor.weather_forecast_precip_probability
+    - sensor.weather_forecast_pressure
+    - sensor.weather_forecast_summary
+    - sensor.weather_forecast_wind_bearing
+    - sensor.weather_forecast_wind_speed
+
+sensors_weather_forecast_1_day:
+  name: Weather forecast tomorrow
+  entities:
+    - sensor.weather_forecast_temperature_1
+    - sensor.weather_forecast_apparent_temperature_1
+    - sensor.weather_forecast_humidity_1
+    - sensor.weather_forecast_precip_intensity_1
+    - sensor.weather_forecast_precip_probability_1
+    - sensor.weather_forecast_pressure_1
+    - sensor.weather_forecast_summary_1
+    - sensor.weather_forecast_wind_bearing_1
+    - sensor.weather_forecast_wind_speed_1
+
+sensors_weather_forecast_2_day:
+  name: Weather forecast 2 days
+  entities:
+    - sensor.weather_forecast_temperature_2
+    - sensor.weather_forecast_apparent_temperature_2
+    - sensor.weather_forecast_humidity_2
+    - sensor.weather_forecast_precip_intensity_2
+    - sensor.weather_forecast_precip_probability_2
+    - sensor.weather_forecast_pressure_2
+    - sensor.weather_forecast_summary_2
+    - sensor.weather_forecast_wind_bearing_2
+    - sensor.weather_forecast_wind_speed_2
+
+sensors_weather_forecast_3_day:
+  name: Weather forecast 3 days
+  entities:
+    - sensor.weather_forecast_temperature_3
+    - sensor.weather_forecast_apparent_temperature_3
+    - sensor.weather_forecast_humidity_3
+    - sensor.weather_forecast_precip_intensity_3
+    - sensor.weather_forecast_precip_probability_3
+    - sensor.weather_forecast_pressure_3
+    - sensor.weather_forecast_summary_3
+    - sensor.weather_forecast_wind_bearing_3
+    - sensor.weather_forecast_wind_speed_3

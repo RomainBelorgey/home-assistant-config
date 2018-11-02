@@ -1,0 +1,99 @@
+- id: 'telegramremoveinline'
+  alias: 'Telegram callback to remove keyboard'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/removekeyboard'
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      message: 'OK'
+  - service: telegram_bot.edit_replymarkup
+    data_template:
+      message_id: '{{ trigger.event.data.message.message_id }}'
+      chat_id: '{{ trigger.event.data.user_id }}'
+      inline_keyboard: []
+
+- id: 'telegramrepeat30m'
+  alias: 'Telegram callback to repeat message in 30 minutes'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/30m'
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      message: 'OK, reminding you in 30 minutes'
+  - service: telegram_bot.edit_replymarkup
+    data_template:
+      message_id: '{{ trigger.event.data.message.message_id }}'
+      chat_id: '{{ trigger.event.data.user_id }}'
+      inline_keyboard: []
+  - delay: '00:30:00'
+  - service: notify.user01_telegram
+    data_template:
+      message: '{{ trigger.event.data.message.text }}'
+      data:
+        inline_keyboard:
+          - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+          - 'No reminder:/removekeyboard'
+
+- id: 'telegramrepeat1h'
+  alias: 'Telegram callback to repeat message in 1 hour'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/1h'
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      message: 'OK, reminding you in 1 hour'
+  - service: telegram_bot.edit_replymarkup
+    data_template:
+      message_id: '{{ trigger.event.data.message.message_id }}'
+      chat_id: '{{ trigger.event.data.user_id }}'
+      inline_keyboard: []
+  - delay: '01:00:00'
+  - service: notify.user01_telegram
+    data_template:
+      message: '{{ trigger.event.data.message.text }}'
+      data:
+        inline_keyboard:
+          - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+          - 'No reminder:/removekeyboard'
+
+- id: 'telegramrepeat3h'
+  alias: 'Telegram callback to repeat message in 3 hours'
+  hide_entity: true
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/3h'
+  action:
+  - service: telegram_bot.answer_callback_query
+    data_template:
+      callback_query_id: '{{ trigger.event.data.id }}'
+      message: 'OK, reminding you in 3 hours'
+  - service: telegram_bot.edit_replymarkup
+    data_template:
+      message_id: '{{ trigger.event.data.message.message_id }}'
+      chat_id: '{{ trigger.event.data.user_id }}'
+      inline_keyboard: []
+  - delay: '03:00:00'
+  - service: notify.user01_telegram
+    data_template:
+      message: '{{ trigger.event.data.message.text }}'
+      data:
+        inline_keyboard:
+          - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+          - 'No reminder:/removekeyboard'

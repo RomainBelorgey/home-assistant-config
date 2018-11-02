@@ -1,0 +1,3 @@
+- platform: samsungtv
+  host: !secret tv_ip
+  name: Tv

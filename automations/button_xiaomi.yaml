@@ -1,0 +1,87 @@
+#Long press = start/stop kodi
+
+- id: 'start kodi'
+  alias: Start kodi
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00020b6539
+      click_type: long_click_press
+  condition:
+  - condition: state
+    entity_id: media_player.kodi
+    state: 'off'
+  action:
+    service: media_player.turn_on
+    entity_id: media_player.kodi
+
+- id: 'stop kodi'
+  alias: Stop kodi
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00020b6539
+      click_type: long_click_press
+  condition:
+    condition: template
+    value_template: "{{ states.media_player.kodi != 'off' }}"
+  action:
+  - service: media_player.turn_off
+    entity_id: media_player.kodi
+  - delay: 00:00:02
+  - service: media_player.turn_off
+    entity_id: media_player.yamaha
+  - delay: 00:00:02
+  - service: media_player.turn_off
+    entity_id: media_player.tv
+
+#double = pause kodi
+- id: 'play pause kodi'
+  alias: play pause kodi
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00020b6539
+      click_type: double
+  condition:
+    condition: template
+    value_template: "{{ states.media_player.kodi != 'off' }}"
+  action:
+    service: media_player.media_play_pause
+    entity_id: media_player.kodi
+
+#Single = light livingroom
+- id: 'Turn on lights'
+  alias: Turn on lights living room
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00020b6539
+      click_type: single
+  condition:
+  - condition: state
+    entity_id: group.lights_living_room
+    state: 'off'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.lights_living_room
+
+- id: 'Turn off lights'
+  alias: Turn off lights living room
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      entity_id: binary_sensor.switch_158d00020b6539
+      click_type: single
+  condition:
+  - condition: state
+    entity_id: group.lights_living_room
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: group.lights_living_room

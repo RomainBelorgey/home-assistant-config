@@ -1,0 +1,114 @@
+#Vacation start stop heaters
+- id: vacation start stop heaters
+  alias: "vacation start stop heaters"
+  trigger:
+    - platform: state
+      entity_id: calendar.vacation
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.run_heaters_automations
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.heaters_automations
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.all_heaters
+        option: "Hors Gel"
+#Vacation stop restart heaters
+- id: vacation stop start heaters
+  alias: "vacation stop start heaters"
+  trigger:
+    - platform: state
+      entity_id: calendar.vacation
+      to: 'off'
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.heaters_automations
+    - delay: 00:00:02
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.run_heaters_automations
+
+#
+#Vacation simulate presence
+#
+
+#Turn on lights
+- id: 'vacation lights on'
+  alias: Vacation lights on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "-00:30:00"
+  condition:
+  - condition: state
+    entity_id: calendar.vacation
+    state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.lights_living_room
+
+#Open cover / off lights
+- id: 'vacation open cover'
+  alias: Vacation open cover
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: "+00:30:00"
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: closed
+    - condition: state
+      entity_id: calendar.vacation
+      state: 'on'
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.window_set_position
+      value: 60
+  - service: homeassistant.turn_off
+    entity_id: group.lights_living_room
+
+#On lights / night | cover will automatically close
+- id: 'vacation lights on / night'
+  alias: Vacation lights on night
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:30:00"
+  condition:
+  - condition: state
+    entity_id: calendar.vacation
+    state: 'on'
+  action:
+  - service: homeassistant.turn_on
+    entity_id: group.lights_living_room
+
+#Off lights / night
+- id: 'vacation lights off / night'
+  alias: Vacation lights off night
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+01:30:00"
+  condition:
+  - condition: state
+    entity_id: calendar.vacation
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: group.lights_living_room

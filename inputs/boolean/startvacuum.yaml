@@ -1,0 +1,4 @@
+start_vacuum:
+  name: "Start vacuum"
+automation_vacuum:
+  name: "vacuum automation"

@@ -1,0 +1,239 @@
+#Livingroom + hall
+
+#
+#Basic weekday / not at home
+#
+
+#Morning confort not at home
+- id: living hall morning confort
+  alias: "living hall morning confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '06:00:00'
+      before: '09:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Confort"
+
+#Back to eco | not at home
+- id: living hall morning back eco
+  alias: "living hall morning back eco"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '09:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '09:00:00'
+      before: '17:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Eco"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Eco"
+
+#Confort for return home
+- id: living hall evening confort
+  alias: "living hall evening confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '17:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: state
+      entity_id: calendar.out
+      state: 'off'
+    - condition: time
+      after: '17:00:00'
+      before: '23:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Confort"
+
+#
+#Confort all day (WFO, week-end, not out)
+#
+
+#Morning confort all day at home
+- id: living hall morning confort allday
+  alias: "living hall morning confort allday"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: time
+      after: '06:00:00'
+      before: '23:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Confort"
+
+#
+#When Out
+#
+
+#Out : back to eco
+- id: living hall out eco
+  alias: "living hall out eco"
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: calendar.out
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.run_heaters_automations
+    state: 'on'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Eco"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Eco"
+
+#Confort back from out
+- id: living hall out confort
+  alias: "living hall out confort"
+  hide_entity: true
+  trigger:
+    - platform: state
+      entity_id: calendar.out
+      to: 'off'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      before: '23:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Confort"
+
+#
+#Night
+#
+
+#Eco for the night
+- id: living hall night
+  alias: "living hall night"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '23:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '23:00:00'
+      before: '06:00:00'
+  action:
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Eco"
+    - delay: 00:00:02
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_hall
+        option: "Eco"

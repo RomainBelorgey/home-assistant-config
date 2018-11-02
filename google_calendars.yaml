@@ -1,0 +1,23 @@
+
+- cal_id: !secret calendar_id
+  entities:
+  - device_id: !secret calendar_device_id_perso
+    ignore_availability: true
+    name: !secret calendar_device_name_perso
+    track: true
+  - device_id: vacation
+    name: Vacation
+    search: "#vacation"
+    track: true
+  - device_id: out
+    name: Out of home
+    search: "#out"
+    track: true
+  - device_id: wfh
+    name: Work from home
+    search: "#wfh"
+    track: true
+  - device_id: pto
+    name: PTO
+    search: "#pto"
+    track: true

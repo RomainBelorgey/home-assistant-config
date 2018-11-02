@@ -1,0 +1,34 @@
+heater_living_room:
+  name: Heater Living Room
+  options:
+  - Arret
+  - Confort
+  - Eco
+  - Hors Gel
+  icon: mdi:gauge
+heater_hall:
+  name: Heater Hall
+  options:
+  - Arret
+  - Confort
+  - Eco
+  - Hors Gel
+  icon: mdi:gauge
+heater_bedroom:
+  name: Heater Bedroom
+  options:
+  - Arret
+  - Confort
+  - Eco
+  - Hors Gel
+  icon: mdi:gauge
+all_heaters:
+  name: All heaters
+  options:
+  - Arret
+  - Confort
+  - Eco
+  - Hors Gel
+  - N/A
+  initial: N/A
+  icon: mdi:gauge

@@ -1,0 +1,112 @@
+- id: vacuum automation to true
+  alias: "Vacuum : Cleaning the appartment"
+  trigger:
+    platform: time
+    at: '01:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    - condition: state
+      entity_id: calendar.vacation
+      state: 'off'
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.automation_vacuum
+
+#If vacation start / stop vacuum automation
+- id: vacation start stop vacuum
+  alias: "vacation start stop vacuum"
+  trigger:
+    - platform: state
+      entity_id: calendar.vacation
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.automation_vacuum
+    state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.automation_vacuum
+
+- id: vacuum cleaning
+  alias: "Vacuum : Cleaning the appartment"
+  trigger:
+    platform: time
+    at: '10:00:00'
+  condition:
+    condition: state
+    entity_id: input_boolean.automation_vacuum
+    state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.start_vacuum
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.automation_vacuum
+
+- id: vacuum cleaning start
+  alias: "Vacuum start"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.start_vacuum
+      to: 'on'
+  action:
+  - service: vacuum.start
+    entity_id: vacuum.xiaomi_vacuum_cleaner
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.start_vacuum
+
+#vacuum notif if at home
+- id: vacuum notification before
+  alias: "Vacuum notification before"
+  trigger:
+    platform: time
+    at: '09:50:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.automation_vacuum
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+  action:
+    service: notify.user01_telegram
+    data:
+      title: "*Cleaning appartment*"
+      message: "The robot vacuum cleaner will start in 10mn"
+      data:
+        inline_keyboard:
+        - 'Stop automation:/vacuum_stop_automation'
+
+- id: vacuum notification
+  alias: "Vacuum notification"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.start_vacuum
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.at_home
+    state: 'on'
+  action:
+    service: notify.user01_telegram
+    data:
+      title: "*Cleaning appartment*"
+      message: "The robot vacuum cleaner is starting"
+      data:
+        inline_keyboard:
+        - 'Pause robot:/vacuum_pause'
+        - 'Stop robot (will return to dock):/vacuum_stop'

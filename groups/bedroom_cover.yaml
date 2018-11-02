@@ -1,0 +1,31 @@
+bedroom_cover:
+  name: Bedroom Cover
+  entities:
+  - cover.bedroom_cover
+  - input_number.window_set_position
+  - input_number.window_position
+  - timer.window_up
+  - timer.window_down
+
+automation_bedroom_cover_hidden:
+  name: automation bedroom cover hidden
+  entities:
+  - automation.cover_mqtt_button1_off_up
+  - automation.cover_mqtt_button2_off_down
+  - automation.cover_timer_stopped
+  - automation.cover_mqtt_button1_on_up
+  - automation.cover_mqtt_button2_on_down
+  - automation.cover_position_up
+  - automation.cover_position_down
+  - automation.cover_set_position_down
+  - automation.cover_set_position_up
+  - input_number.window_set_position
+  - input_number.window_position
+  - timer.window_up
+  - timer.window_down
+
+
+automation_bedroom_cover:
+  name: automation bedroom cover
+  entities:
+  - automation.cover_close_at_night

@@ -1,0 +1,10 @@
+- id: kodi switch stop
+  alias: "Kodi : socket off if shutdown"
+  trigger:
+    platform: state
+    entity_id: media_player.kodi
+    to: 'off'
+  action:
+  - delay: 00:00:02
+  - service: switch.turn_off
+    entity_id: switch.switch_kodi

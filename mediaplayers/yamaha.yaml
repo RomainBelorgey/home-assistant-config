@@ -1,0 +1,5 @@
+- platform: yamaha
+  host: !secret yamaha_ip
+  name: yamaha
+  zone_ignore:
+    - "Zone_2"

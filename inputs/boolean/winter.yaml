@@ -1,0 +1,6 @@
+winter_mode:
+  name: "Winter mode: heaters on"
+  icon: mdi:gauge
+run_heaters_automations:
+  name: "Winter: run heaters automations"
+  icon: mdi:gauge

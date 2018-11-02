@@ -1,0 +1,107 @@
+# Notify washer finished
+- id: washer notification
+  alias: "Washer notification finished"
+  trigger:
+    platform: state
+    entity_id: sensor.washer
+    from: 'wash'
+    to: 'on'
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.washer_finished
+
+# Notify washer finished if at home
+- id: washer notification at home
+  alias: "Washer notification at home"
+  trigger:
+    platform: state
+    entity_id: input_boolean.washer_finished
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: state
+      entity_id: calendar.out
+      state: 'off'
+  action:
+  - service: notify.user01_telegram
+    data:
+      title: "*Washer*"
+      message: "Washer finished, please check the laundry !"
+      data:
+        inline_keyboard:
+        - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+        - 'No reminder:/removekeyboard'
+  - service: xiaomi_aqara.play_ringtone
+    data:
+      gw_mac: !secret xiaomi_gw_mac
+      ringtone_id: 27
+      ringtone_vol: 10
+
+
+# Notify washer finished after come back or not at home
+- id: washer notification return out
+  alias: "Washer notification return out"
+  trigger:
+    - platform: state
+      entity_id: calendar.out
+      to: 'off'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.washer_finished
+      state: 'on'
+  action:
+  - service: notify.user01_telegram
+    data:
+      title: "*Washer*"
+      message: "*REMINDER*\n\nWasher finished, please check the laundry !"
+      data:
+        inline_keyboard:
+        - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+        - 'No reminder:/removekeyboard'
+
+- id: washer notification return work
+  alias: "Washer notification return work"
+  trigger:
+    - platform: time
+      at: '18:30:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.washer_finished
+      state: 'on'
+    - condition: state
+      entity_id: calendar.out
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+  action:
+  - service: notify.user01_telegram
+    data:
+      title: "*Washer*"
+      message: "*REMINDER*\n\nWasher finished, please check the laundry !"
+      data:
+        inline_keyboard:
+        - '30 Minutes:/30m, 1 Hour:/1h, 3 Hours:/3h'
+        - 'No reminder:/removekeyboard'
+
+
+- id: washer finished bool to false
+  alias: "Washer finished bool to false"
+  trigger:
+    platform: state
+    entity_id: sensor.washer
+    from: 'on'
+    to: 'off'
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.washer_finished

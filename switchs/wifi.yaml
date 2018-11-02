@@ -1,0 +1,12 @@
+- platform: broadlink
+  name: kodi
+  host: !secret switch_wifi_kodi_ip
+  mac: '78:0f:77:19:cb:b5'
+  friendly_name: 'Switch kodi'
+  type: sp3
+- platform: broadlink
+  name: washer
+  host: !secret switch_wifi_washer_ip
+  mac: '34:ea:34:79:c9:13'
+  friendly_name: 'Switch washer'
+  type: sp3

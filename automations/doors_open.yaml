@@ -1,0 +1,52 @@
+#If window open during winter, stop heaters
+
+- id: 'Window open'
+  alias: window open stop heaters
+  trigger:
+    - platform: state
+      entity_id: group.window_sensors
+      from: 'off'
+      to: 'on'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 10
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.run_heaters_automations
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.heaters_automations
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.all_heaters
+        option: "Arret"
+
+- id: 'window closed'
+  alias: window closed restart heaters
+  trigger:
+    - platform: state
+      entity_id: group.window_sensors
+      from: 'on'
+      to: 'off'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 10
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.heaters_automations
+    - delay: 00:00:02
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.run_heaters_automations

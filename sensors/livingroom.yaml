@@ -1,0 +1,14 @@
+- platform: template
+  sensors:
+    temp_livingroom:
+      friendly_name: "Temp Living Room"
+      unit_of_measurement: '°C'
+      value_template: "{{ states.fan.xiaomi_miio_device.attributes.temperature }}"
+    humidity_livingroom:
+      friendly_name: "Humidity Living Room"
+      unit_of_measurement: '%'
+      value_template: "{{ states.fan.xiaomi_miio_device.attributes.humidity }}"
+    air_quality_livingroom:
+      friendly_name: "Air quality Living Room"
+      unit_of_measurement: 'aqi'
+      value_template: "{{ states.fan.xiaomi_miio_device.attributes.aqi }}"

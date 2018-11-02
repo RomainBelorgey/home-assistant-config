@@ -1,0 +1,12 @@
+- platform: waqi
+  token: !secret waqi_token
+  locations:
+  - Place De Lopera, Paris
+  - paris
+  stations:
+  - Paris
+  - Place De Lopera, Paris
+- platform: waqi
+  token: !secret waqi_token
+  locations:
+  - Belfort Octroi
