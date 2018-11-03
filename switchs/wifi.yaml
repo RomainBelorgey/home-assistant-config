@@ -10,3 +10,24 @@
   mac: '34:ea:34:79:c9:13'
   friendly_name: 'Switch washer'
   type: sp3
+#sonoff 01
+- platform: mqtt
+  name: Light living room
+  state_topic: "stat/sonoff_socket_01/POWER"
+  command_topic: "cmnd/sonoff_socket_01/power"
+  optimistic: false
+  qos: 1
+#sonoff 02
+- platform: mqtt
+  name: Not used
+  state_topic: "stat/sonoff_socket_02/POWER"
+  command_topic: "cmnd/sonoff_socket_02/power"
+  optimistic: false
+  qos: 1
+#sonoff 03
+- platform: mqtt
+  name: Not used
+  state_topic: "stat/sonoff_socket_03/POWER"
+  command_topic: "cmnd/sonoff_socket_03/power"
+  optimistic: false
+  qos: 1
