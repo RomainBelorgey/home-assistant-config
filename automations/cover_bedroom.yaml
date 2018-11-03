@@ -11,7 +11,7 @@
   - service: input_number.set_value
     data:
       entity_id: input_number.window_set_position
-      value: 60
+      value: 65
 
 - id: 'close at night'
   alias: Cover close at night
