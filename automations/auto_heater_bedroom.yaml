@@ -21,7 +21,7 @@
       state: 'on'
     - condition: time
       after: '06:00:00'
-      before: '09:00:00'
+      before: '08:00:00'
   action:
     - service: input_select.select_option
       data_template:
@@ -33,7 +33,7 @@
   hide_entity: true
   trigger:
     - platform: time
-      at: '09:00:00'
+      at: '08:00:00'
     - platform: state
       entity_id: input_boolean.run_heaters_automations
       to: 'on'
@@ -44,7 +44,7 @@
       entity_id: input_boolean.run_heaters_automations
       state: 'on'
     - condition: time
-      after: '09:00:00'
+      after: '08:00:00'
       before: '19:00:00'
   action:
     - service: input_select.select_option
