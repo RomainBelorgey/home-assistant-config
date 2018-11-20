@@ -8,10 +8,6 @@
     condition: template
     value_template: "{{ (states.input_number.window_position.state | int)  == 27 }}"
   action:
-  - service: input_number.set_value
-    data:
-      entity_id: input_number.window_set_position
-      value: 100
   - delay: 00:00:01
   - service: input_number.set_value
     data:
@@ -32,6 +28,49 @@
   - service: cover.close_cover
     data:
       entity_id: cover.bedroom_cover
+
+- id: 'set position to 100'
+  alias: set position to 100
+  trigger:
+    platform: state
+    entity_id: input_number.window_position
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int)  == 27 }}"
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.window_set_position
+      value: 100
+
+- id: 'set position to 0'
+  alias: set position to 0
+  trigger:
+    platform: state
+    entity_id: input_number.window_position
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int)  == 0 }}"
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.window_set_position
+      value: 0
+
+- id: 'little opening'
+  alias: little opening one tuch
+  trigger:
+  - payload: 'ON'
+    platform: mqtt
+    topic: stat/sonoff_cover_bedroom/POWER1
+  condition:
+    condition: template
+    value_template: "{{ (states.input_number.window_position.state | int)  == 0 }}"
+  action:
+  - service: input_number.set_value
+    data:
+      entity_id: input_number.window_set_position
+      value: 55
 
 - id: 'bedroom1'
   alias: Cover MQTT Button1 OFF (up)
