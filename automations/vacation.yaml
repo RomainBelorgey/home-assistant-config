@@ -79,7 +79,7 @@
   - service: input_number.set_value
     data:
       entity_id: input_number.window_set_position
-      value: 60
+      value: 55
   - service: homeassistant.turn_off
     entity_id: group.lights_living_room
 
