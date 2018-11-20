@@ -27,12 +27,12 @@
       after: '06:00:00'
       before: '09:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Confort"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -61,12 +61,12 @@
       after: '09:00:00'
       before: '17:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Eco"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -98,12 +98,12 @@
       after: '17:00:00'
       before: '23:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Confort"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -136,12 +136,12 @@
       after: '06:00:00'
       before: '23:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Confort"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -164,12 +164,12 @@
     entity_id: input_boolean.run_heaters_automations
     state: 'on'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Eco"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -192,12 +192,12 @@
     - condition: time
       before: '23:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Confort"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
@@ -227,12 +227,12 @@
       after: '23:00:00'
       before: '06:00:00'
   action:
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
         option: "Eco"
-    - delay: 00:00:02
+    - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_hall
