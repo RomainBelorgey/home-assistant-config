@@ -4,7 +4,7 @@
   alias: Start kodi
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: long_click_press
@@ -20,7 +20,7 @@
   alias: Stop kodi
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: long_click_press
@@ -42,7 +42,7 @@
   alias: play pause kodi
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: double
@@ -58,7 +58,7 @@
   alias: Turn on lights living room
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: single
@@ -74,7 +74,7 @@
   alias: Turn off lights living room
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: single
