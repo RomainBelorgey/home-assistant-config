@@ -76,12 +76,11 @@
       entity_id: calendar.vacation
       state: 'on'
   action:
-  - service: input_number.set_value
-    data:
-      entity_id: input_number.window_set_position
-      value: 55
-  - service: homeassistant.turn_off
-    entity_id: group.lights_living_room
+    - service: cover.open_cover
+      data:
+        entity_id: cover.bedroom_cover
+    - service: homeassistant.turn_off
+      entity_id: group.lights_living_room
 
 #On lights / night | cover will automatically close
 - id: 'vacation lights on / night'
