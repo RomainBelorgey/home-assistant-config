@@ -3,6 +3,7 @@ default_view_test:
   icon: mdi:home
   name: home test
   entities:
+    - group.modes
     - group.sensors_interior
     - group.sensors_current_weather_1
     - weather.weather_hourly
@@ -14,6 +15,12 @@ default_view_test:
     - group.washer
     - group.window_sensors
     - group.lights_living_room
+
+modes:
+  name: Modes
+  entities:
+    - input_boolean.summer_mode
+    - input_boolean.winter_mode
 
 media_view:
   view: yes
@@ -58,7 +65,6 @@ heaters_view:
 heaters:
   name: Heaters
   entities:
-    - input_boolean.winter_mode
     - input_select.all_heaters
     - input_select.heater_hall
     - input_select.heater_bedroom
