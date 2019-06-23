@@ -1,6 +1,6 @@
 media_player.salon_zone_2:
   hidden: true
-automation.vacuum__cleaning_the_appartment:
+automation.vacuum_cleaning_the_appartment:
   icon: mdi:robot-vacuum
 group.all_automations:
   hidden: false
