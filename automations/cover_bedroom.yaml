@@ -14,16 +14,71 @@
         entity_id: input_number.window_set_position
         value: 65
 
-- id: 'close at night'
-  alias: Cover close at night
+- id: 'close at night on winter'
+  alias: Cover close at night on winter
   trigger:
     platform: sun
     event: sunset
     offset: "+00:30:00"
   condition:
-    condition: state
-    entity_id: cover.bedroom_cover
-    state: open
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
+    - condition: state
+      entity_id: input_boolean.winter_mode
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
+      state: 'off'
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: 'close at night'
+  alias: Cover close at night
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
+    - condition: state
+      entity_id: input_boolean.winter_mode
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
+      state: 'off'
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: 'close when door closed'
+  alias: Cover close with door
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
+      from: 'on'
+      to: 'off'
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 10
+  condition:
+    condition: and
+    conditions:
+    - condition: state  # from sunset until sunrise
+      entity_id: sun.sun
+      state: 'below_horizon'
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
   action:
   - service: cover.close_cover
     data:
@@ -150,7 +205,7 @@
 - id: 'bedroom6'
   alias: Cover Position UP
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/1'
   condition:
     condition: state
@@ -170,7 +225,7 @@
 - id: 'bedroom7'
   alias: Cover Position Down
   trigger:
-    platform: time
+    platform: time_pattern
     seconds: '/1'
   condition:
     condition: state
