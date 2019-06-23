@@ -30,6 +30,9 @@
       entity_id: input_boolean.winter_mode
       state: 'on'
     - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'off'
+    - condition: state
       entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
       state: 'off'
   action:
@@ -50,6 +53,9 @@
       state: open
     - condition: state
       entity_id: input_boolean.winter_mode
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.summer_mode
       state: 'off'
     - condition: state
       entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
@@ -79,6 +85,93 @@
     - condition: state
       entity_id: cover.bedroom_cover
       state: open
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+# Summer
+
+- id: summer close cover afternoon
+  alias: "Summer : Closing cover afternoon" 
+  trigger:
+    platform: time
+    at: '14:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'on'
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.bedroom_cover
+
+- id: summer open cover night 1
+  alias: "Summer : open cover night 1" 
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:30:00"
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'on'
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: closed
+  action:
+    - delay: 00:00:01
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.window_set_position
+        value: 55
+
+- id: summer open cover night 2
+  alias: "Summer : open cover night 2" 
+  trigger:
+    platform: sun
+    event: sunset
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'on'
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
+  action:
+    - delay: 00:00:01
+    - service: input_number.set_value
+      data:
+        entity_id: input_number.window_set_position
+        value: 25
+
+- id: summer close cover
+  alias: "Summer : close cover" 
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "+02:00:00"
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.summer_mode
+      state: 'on'
+    - condition: state
+      entity_id: cover.bedroom_cover
+      state: open
+    - condition: state
+      entity_id: binary_sensor.door_window_sensor_158d000276bedc #bedroom
+      state: 'off'
   action:
   - service: cover.close_cover
     data:
