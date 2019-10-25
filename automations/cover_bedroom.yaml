@@ -114,9 +114,13 @@
 - id: summer open cover night 1
   alias: "Summer : open cover night 1" 
   trigger:
-    platform: sun
-    event: sunset
-    offset: "-00:30:00"
+    #platform: sun
+    #event: sunset
+    #offset: "-00:30:00"
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: 3.0
   condition:
     condition: and
     conditions:
@@ -136,8 +140,12 @@
 - id: summer open cover night 2
   alias: "Summer : open cover night 2" 
   trigger:
-    platform: sun
-    event: sunset
+    #platform: sun
+    #event: sunset
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: -5.0
   condition:
     condition: and
     conditions:
@@ -152,14 +160,18 @@
     - service: input_number.set_value
       data:
         entity_id: input_number.window_set_position
-        value: 25
+        value: 75
 
 - id: summer close cover
   alias: "Summer : close cover" 
   trigger:
-    platform: sun
-    event: sunset
-    offset: "+02:00:00"
+    #platform: sun
+    #event: sunset
+    #offset: "+02:00:00"
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: -10.0
   condition:
     condition: and
     conditions:
