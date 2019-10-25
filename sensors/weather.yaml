@@ -25,5 +25,5 @@
     - 1
     - 2
     - 3
-  update_interval:
+  scan_interval:
     minutes: 10
