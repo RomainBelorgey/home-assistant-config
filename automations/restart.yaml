@@ -1,0 +1,25 @@
+# restart HA to keep it fresh
+- alias: Restart HA
+  trigger: 
+    platform: time
+    at: "03:00:00"  
+  condition:
+    condition: time
+    weekday:
+    - wed
+  action:
+    - service: homeassistant.restart
+# set window position to 0 after restart
+#- alias: Set window position to 0 after restart
+#  trigger: 
+#    platform: time
+#    at: "03:30:00"  
+#  condition:
+#    condition: time
+#    weekday:
+#    - wed
+#  action:
+#  - service: input_number.set_value
+#    data:
+#      entity_id: input_number.window_position
+#      value: 0
