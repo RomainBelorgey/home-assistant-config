@@ -264,7 +264,7 @@ class TelegramBotEventListener(hass.Hass):
         #Vacuum
         if data_callback == '/vacuum_start':
             self.call_service('vacuum/start',
-                              entity_id='vacuum.xiaomi_vacuum_cleaner')
+                              entity_id='vacuum.vacuum_up')
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
                               message_id='last',
@@ -273,10 +273,10 @@ class TelegramBotEventListener(hass.Hass):
                               inline_keyboard=[])
             maxLoop = 10
             loop = 0
-            state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+            state = self.get_state("vacuum.vacuum_up")
             while state != "cleaning" and loop < maxLoop:
                 time.sleep(2)
-                state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+                state = self.get_state("vacuum.vacuum_up")
                 loop=loop+1
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
@@ -286,7 +286,7 @@ class TelegramBotEventListener(hass.Hass):
                               inline_keyboard=[])
         if data_callback == '/vacuum_stop':
             self.call_service('vacuum/return_to_base',
-                              entity_id='vacuum.xiaomi_vacuum_cleaner')
+                              entity_id='vacuum.vacuum_up')
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
                               message_id='last',
@@ -295,10 +295,10 @@ class TelegramBotEventListener(hass.Hass):
                               inline_keyboard=[])
             maxLoop = 60
             loop = 0
-            state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+            state = self.get_state("vacuum.vacuum_up")
             while state != "docked" and loop < maxLoop:
                 time.sleep(2)
-                state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+                state = self.get_state("vacuum.vacuum_up")
                 loop=loop+1
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
@@ -308,7 +308,7 @@ class TelegramBotEventListener(hass.Hass):
                               inline_keyboard=[])
         if data_callback == '/vacuum_pause':
             self.call_service('vacuum/pause',
-                              entity_id='vacuum.xiaomi_vacuum_cleaner')
+                              entity_id='vacuum.vacuum_up')
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
                               message_id='last',
@@ -317,10 +317,10 @@ class TelegramBotEventListener(hass.Hass):
                               inline_keyboard=[])
             maxLoop = 10
             loop = 0
-            state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+            state = self.get_state("vacuum.vacuum_up")
             while state != "paused" and loop < maxLoop:
                 time.sleep(2)
-                state = self.get_state("vacuum.xiaomi_vacuum_cleaner")
+                state = self.get_state("vacuum.vacuum_up")
                 loop=loop+1
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,

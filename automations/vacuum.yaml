@@ -62,7 +62,7 @@
       to: 'on'
   action:
   - service: vacuum.start
-    entity_id: vacuum.xiaomi_vacuum_cleaner
+    entity_id: vacuum.vacuum_up
   - service: input_boolean.turn_off
     data:
       entity_id: input_boolean.start_vacuum

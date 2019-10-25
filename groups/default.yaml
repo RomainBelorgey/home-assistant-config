@@ -105,7 +105,8 @@ xiaomi:
   name: xiaomi
   entities:
     - input_boolean.automation_vacuum
-    - vacuum.xiaomi_vacuum_cleaner
+    - vacuum.vacuum_up
+    - vacuum.vacuum_down
     - fan.xiaomi_miio_device
 
 automation_view:
