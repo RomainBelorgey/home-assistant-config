@@ -1,6 +1,6 @@
   window_position:
     name: "Window Position"
-    initial: 10
+    initial: 0
     min: 0
     max: 27
   window_set_position:
