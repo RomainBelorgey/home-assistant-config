@@ -1,12 +1,12 @@
-#Livingroom + hall
+#Livingroom + office
 
 #
 #Basic weekday / not at home
 #
 
 #Morning confort not at home
-- id: living hall morning confort
-  alias: "living hall morning confort"
+- id: living office morning confort
+  alias: "living office morning confort"
   hide_entity: true
   trigger:
     - platform: time
@@ -35,12 +35,12 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Confort"
 
 #Back to eco | not at home
-- id: living hall morning back eco
-  alias: "living hall morning back eco"
+- id: living office morning back eco
+  alias: "living office morning back eco"
   hide_entity: true
   trigger:
     - platform: time
@@ -69,12 +69,12 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Eco"
 
 #Confort for return home
-- id: living hall evening confort
-  alias: "living hall evening confort"
+- id: living office evening confort
+  alias: "living office evening confort"
   hide_entity: true
   trigger:
     - platform: time
@@ -106,7 +106,7 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Confort"
 
 #
@@ -114,8 +114,8 @@
 #
 
 #Morning confort all day at home
-- id: living hall morning confort allday
-  alias: "living hall morning confort allday"
+- id: living office morning confort allday
+  alias: "living office morning confort allday"
   hide_entity: true
   trigger:
     - platform: time
@@ -144,7 +144,7 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Confort"
 
 #
@@ -152,8 +152,8 @@
 #
 
 #Out : back to eco
-- id: living hall out eco
-  alias: "living hall out eco"
+- id: living office out eco
+  alias: "living office out eco"
   hide_entity: true
   trigger:
     - platform: state
@@ -172,12 +172,12 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Eco"
 
 #Confort back from out
-- id: living hall out confort
-  alias: "living hall out confort"
+- id: living office out confort
+  alias: "living office out confort"
   hide_entity: true
   trigger:
     - platform: state
@@ -200,7 +200,7 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Confort"
 
 #
@@ -208,8 +208,8 @@
 #
 
 #Eco for the night
-- id: living hall night
-  alias: "living hall night"
+- id: living office night
+  alias: "living office night"
   hide_entity: true
   trigger:
     - platform: time
@@ -235,5 +235,5 @@
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_office
         option: "Eco"

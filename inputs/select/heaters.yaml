@@ -6,8 +6,16 @@ heater_living_room:
   - Eco
   - Hors Gel
   icon: mdi:gauge
-heater_hall:
-  name: Heater Hall
+heater_kitchen:
+  name: Heater Kitchen
+  options:
+  - Arret
+  - Confort
+  - Eco
+  - Hors Gel
+  icon: mdi:gauge
+heater_office:
+  name: Heater Office
   options:
   - Arret
   - Confort

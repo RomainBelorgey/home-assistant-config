@@ -66,7 +66,8 @@ heaters:
   name: Heaters
   entities:
     - input_select.all_heaters
-    - input_select.heater_hall
+    - input_select.heater_kitchen
+    - input_select.heater_office
     - input_select.heater_bedroom
     - input_select.heater_living_room
 
@@ -77,13 +78,13 @@ heaters_automations:
     - automation.bedroom_morning_back_eco
     - automation.bedroom_evening_confort
     - automation.bedroom_night
-    - automation.living_hall_morning_confort
-    - automation.living_hall_morning_back_eco
-    - automation.living_hall_evening_confort
-    - automation.living_hall_morning_confort_allday
-    - automation.living_hall_out_eco
-    - automation.living_hall_out_confort
-    - automation.living_hall_night
+    - automation.living_office_morning_confort
+    - automation.living_office_morning_back_eco
+    - automation.living_office_evening_confort
+    - automation.living_office_morning_confort_allday
+    - automation.living_office_out_eco
+    - automation.living_office_out_confort
+    - automation.living_office_night
 
 heaters_scripts:
   name: Heaters scripts

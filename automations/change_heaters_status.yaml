@@ -1,9 +1,9 @@
-#Hall Heater
-- alias: Change heater status
+#Living room heater
+- alias: Change heater status living room
   hide_entity: true
   trigger:
     platform: state
-    entity_id: input_select.heater_hall,input_select.heater_living_room,input_select.heater_bedroom
+    entity_id: input_select.heater_living_room
   action:
     - service: script.turn_on
       data_template:
@@ -18,7 +18,83 @@
             script.heater_horsgel_command
           {% endif %}
         variables:
-          topic: "{{trigger.entity_id|replace('input_select.','sonoff_')}}"
+          topic: "sonoff_4ch_01"
+          power1: "power1"
+          power2: "power2"
+
+#Kitchen room heater
+- alias: Change heater status kitchen
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.heater_kitchen
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if trigger.to_state.state == 'Eco' %}
+            script.heater_eco_command
+          {% elif trigger.to_state.state == 'Confort' %}
+            script.heater_confort_command
+          {% elif trigger.to_state.state == 'Arret' %}
+            script.heater_arret_command
+          {% else %}
+            script.heater_horsgel_command
+          {% endif %}
+        variables:
+          topic: "sonoff_4ch_01"
+          power1: "power3"
+          power2: "power4"
+
+#Office room heater
+- alias: Change heater status office
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.heater_office
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if trigger.to_state.state == 'Eco' %}
+            script.heater_eco_command
+          {% elif trigger.to_state.state == 'Confort' %}
+            script.heater_confort_command
+          {% elif trigger.to_state.state == 'Arret' %}
+            script.heater_arret_command
+          {% else %}
+            script.heater_horsgel_command
+          {% endif %}
+        variables:
+          topic: "sonoff_4ch_02"
+          power1: "power1"
+          power2: "power2"
+
+#bedroom heater
+- alias: Change heater status bedroom
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: input_select.heater_bedroom
+  action:
+    - service: script.turn_on
+      data_template:
+        entity_id: >
+          {% if trigger.to_state.state == 'Eco' %}
+            script.heater_eco_command
+          {% elif trigger.to_state.state == 'Confort' %}
+            script.heater_confort_command
+          {% elif trigger.to_state.state == 'Arret' %}
+            script.heater_arret_command
+          {% else %}
+            script.heater_horsgel_command
+          {% endif %}
+        variables:
+          topic: "sonoff_4ch_02"
+          power1: "power3"
+          power2: "power4"
+
+#Change all heaters
 - alias: Change all heaters status
   hide_entity: true
   trigger:
@@ -27,12 +103,17 @@
   action:
     - service: input_select.select_option
       data_template:
-        entity_id: input_select.heater_hall
+        entity_id: input_select.heater_kitchen
         option: "{{trigger.to_state.state}}"
     - delay: 00:00:03
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_living_room
+        option: "{{trigger.to_state.state}}"
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_office
         option: "{{trigger.to_state.state}}"
     - delay: 00:00:03
     - service: input_select.select_option

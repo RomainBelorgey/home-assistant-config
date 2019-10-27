@@ -20,14 +20,15 @@ class TelegramBotEventListener(hass.Hass):
             state_winter = self.get_state("input_boolean.winter_mode")
             state_bedroom = self.get_state("input_select.heater_bedroom")
             state_living_room = self.get_state("input_select.heater_living_room")
-            state_hall = self.get_state("input_select.heater_hall")
+            state_office = self.get_state("input_select.heater_office")
+            state_kitchen = self.get_state("input_select.heater_kitchen")
             if state_winter =='on':
                 msg = 'Winter mode is on'
                 keyboard = [[("Modify the status", "/heaters_modify"),("Reset to default state", "/heaters_reset")]]
             else:
                 msg = 'Winter mode is off\n\n*No automation activated\nBe sure to stop heaters afterwards !!\n*'
                 keyboard = [[("Modify the status", "/heaters_modify")]]
-            msg = msg+'\nHall: '+state_hall+'\nLiving room: '+state_living_room+'\nBedroom: '+state_bedroom
+            msg = msg+'\nLiving room: '+state_living_room+'\nKitchen: '+state_kitchen+'\nOffice: '+state_office+'\nBedroom: '+state_bedroom
             self.call_service('telegram_bot/send_message',
                               title='*Heaters status*',
                               target=user_id,
@@ -115,7 +116,8 @@ class TelegramBotEventListener(hass.Hass):
         #Modify heater step1
         if data_callback == "/heaters_modify":
             msg = 'Please select a room:'
-            keyboard = [[("Living Room", "/heater_room_livingroom"), ("Bedroom", "/heater_room_bedroom"), ("Hall", "/heater_room_hall")],
+            keyboard = [[("Living Room", "/heater_room_livingroom"), ("Kitchen", "/heater_room_kitchen")],
+                        [("Bedroom", "/heater_room_bedroom"), ("Office", "/heater_room_office")],
                         [("All heaters", "/heater_room_all")]]
             self.call_service('telegram_bot/edit_replymarkup',
                               chat_id=chat_id,
@@ -191,8 +193,9 @@ class TelegramBotEventListener(hass.Hass):
                 msg = msg+'\nNot at home scenario'
             state_bedroom = self.get_state("input_select.heater_bedroom")
             state_living_room = self.get_state("input_select.heater_living_room")
-            state_hall = self.get_state("input_select.heater_hall")
-            msg = msg + '\nHall: '+state_hall+'\nLiving room: '+state_living_room+'\nBedroom: '+state_bedroom
+            state_kitchen = self.get_state("input_select.heater_kitchen")
+            state_office = self.get_state("input_select.heater_office")
+            msg = msg+'\nLiving room: '+state_living_room+'\nKitchen: '+state_kitchen+'\nOffice: '+state_office+'\nBedroom: '+state_bedroom
             self.call_service('telegram_bot/edit_message',
                               chat_id=chat_id,
                               message_id='last',
@@ -366,8 +369,9 @@ class TelegramBotEventListener(hass.Hass):
             time.sleep(10)
             state_bedroom = self.get_state("input_select.heater_bedroom")
             state_living_room = self.get_state("input_select.heater_living_room")
-            state_hall = self.get_state("input_select.heater_hall")
-            msg = msg + 'Hall: '+state_hall+'\nLiving room: '+state_living_room+'\nBedroom: '+state_bedroom
+            state_kitchen = self.get_state("input_select.heater_kitchen")
+            state_office = self.get_state("input_select.heater_office")
+            msg = msg+'\nLiving room: '+state_living_room+'\nKitchen: '+state_kitchen+'\nOffice: '+state_office+'\nBedroom: '+state_bedroom
             self.call_service('telegram_bot/edit_message',
                               chat_id=user_id,
                               message_id='last',
