@@ -8,3 +8,6 @@ vacation_vacuum:
 washer_sensor:
   module: washer_sensor
   class: WasherSensor
+heater:
+  module: heaters
+  class: Heaters

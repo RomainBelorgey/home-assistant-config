@@ -8,6 +8,7 @@
   mac: '34:ea:34:79:c9:13'
   friendly_name: 'Switch washer'
   type: sp3
+#sockets
 #sonoff 01
 - platform: mqtt
   name: Light living room
@@ -29,3 +30,62 @@
   command_topic: "cmnd/sonoff_socket_03/power"
   optimistic: false
   qos: 1
+#sonoff_4ch
+#01
+- platform: mqtt
+  name: fil pilote living room 1
+  state_topic: "stat/sonoff_4ch_01/POWER1"
+  command_topic: "cmnd/sonoff_4ch_01/POWER1"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote living room 2
+  state_topic: "stat/sonoff_4ch_01/POWER2"
+  command_topic: "cmnd/sonoff_4ch_01/POWER2"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote kitchen 1
+  state_topic: "stat/sonoff_4ch_01/POWER3"
+  command_topic: "cmnd/sonoff_4ch_01/POWER3"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote kitchen 2
+  state_topic: "stat/sonoff_4ch_01/POWER4"
+  command_topic: "cmnd/sonoff_4ch_01/POWER4"
+  optimistic: false
+  qos: 1
+  retain: true
+#02
+- platform: mqtt
+  name: fil pilote office 1
+  state_topic: "stat/sonoff_4ch_02/POWER1"
+  command_topic: "cmnd/sonoff_4ch_02/POWER1"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote office 2
+  state_topic: "stat/sonoff_4ch_02/POWER2"
+  command_topic: "cmnd/sonoff_4ch_02/POWER2"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote bedroom 1
+  state_topic: "stat/sonoff_4ch_02/POWER3"
+  command_topic: "cmnd/sonoff_4ch_02/POWER3"
+  optimistic: false
+  qos: 1
+  retain: true
+- platform: mqtt
+  name: fil pilote bedroom 2
+  state_topic: "stat/sonoff_4ch_02/POWER4"
+  command_topic: "cmnd/sonoff_4ch_02/POWER4"
+  optimistic: false
+  qos: 1
+  retain: true
