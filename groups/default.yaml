@@ -95,14 +95,6 @@ heaters_automations:
     - automation.heaters_night
     - automation.heater_office_night
 
-heaters_scripts:
-  name: Heaters scripts
-  entities:
-    - script.heater_arret_command
-    - script.heater_confort_command
-    - script.heater_eco_command
-    - script.heater_horsgel_command
-
 media:
   name: Media Center
   icon: mdi:television-classic
