@@ -140,6 +140,7 @@ input_boolean: !include_dir_merge_named inputs/boolean
 input_number: !include_dir_merge_named inputs/number
 switch: !include_dir_merge_list switchs
 sensor: !include_dir_merge_list sensors
+binary_sensor: !include_dir_merge_list sensors/binary
 group: !include_dir_merge_named groups
 script: !include_dir_merge_named scripts
 media_player: !include_dir_merge_list mediaplayers
