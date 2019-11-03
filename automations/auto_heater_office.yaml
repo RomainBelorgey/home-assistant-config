@@ -1,0 +1,73 @@
+#Office
+
+#
+#Basic weekday / not at home
+#
+
+#Confort for return home
+- id: office evening confort
+  alias: "office evening confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '17:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.disable_automation_heater_office
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '17:00:00'
+      before: '23:00:00'
+  action:
+    - delay: 00:00:06
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_office
+        option: "Confort"
+
+#
+#Confort all day (WFO, week-end)
+#
+
+#Morning confort all day at home
+- id: office morning confort allday
+  alias: "office morning confort allday"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.disable_automation_heater_office
+      state: 'off'
+    - condition: time
+      after: '06:00:00'
+      before: '23:00:00'
+  action:
+    - delay: 00:00:06
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_office
+        option: "Confort"

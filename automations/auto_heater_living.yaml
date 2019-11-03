@@ -1,0 +1,121 @@
+#Livingroom
+
+#
+#Basic weekday / not at home
+#
+
+#Morning confort not at home
+- id: living morning confort
+  alias: "living morning confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '06:00:00'
+      before: '09:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+
+#Back to eco | not at home
+- id: living morning back eco
+  alias: "living morning back eco"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '09:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '09:00:00'
+      before: '17:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Eco"
+
+#Confort for return home
+- id: living evening confort
+  alias: "living evening confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '17:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'off'
+    - condition: time
+      after: '17:00:00'
+      before: '23:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"
+
+#
+#Confort all day (WFO, week-end)
+#
+
+#Morning confort all day at home
+- id: living morning confort allday
+  alias: "living morning confort allday"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: time
+      after: '06:00:00'
+      before: '23:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Confort"

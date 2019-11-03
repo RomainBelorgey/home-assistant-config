@@ -1,0 +1,44 @@
+#
+#When Out
+#
+
+- id: out heaters eco
+  alias: "out heaters eco"
+  trigger:
+    - platform: state
+      entity_id: calendar.out
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.run_heaters_automations
+    - service: homeassistant.turn_off
+      data:
+        entity_id: group.heaters_automations
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.all_heaters
+        option: "Eco"
+
+- id: out heaters back
+  alias: "out heaters back"
+  trigger:
+    - platform: state
+      entity_id: calendar.out
+      to: 'off'
+  condition:
+    condition: state
+    entity_id: input_boolean.winter_mode
+    state: 'on'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.heaters_automations
+    - delay: 00:00:02
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.run_heaters_automations

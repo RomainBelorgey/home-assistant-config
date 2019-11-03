@@ -1,0 +1,169 @@
+#Kitchen
+
+#
+#Basic weekday / not at home
+#
+
+#Morning confort not at home
+- id: kitchen morning confort
+  alias: "kitchen morning confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '06:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '06:00:00'
+      before: '08:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Confort"
+
+#Back to eco | not at home
+- id: kitchen morning back eco
+  alias: "kitchen morning back eco"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '08:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '08:00:00'
+      before: '18:00:00'
+  action:
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Eco"
+
+#Confort for return home
+- id: kitchen evening confort
+  alias: "kitchen evening confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '18:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '18:00:00'
+      before: '20:00:00'
+  action:
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Confort"
+
+#Back to eco
+- id: kitchen evening eco
+  alias: "kitchen evening eco"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '20:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '20:00:00'
+      before: '23:00:00'
+  action:
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Eco"
+
+#
+#At home (WFO, week-end)
+#
+
+#Lunch confort
+- id: kitchen lunch confort
+  alias: "kitchen lunch confort"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '11:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: time
+      after: '11:00:00'
+      before: '13:00:00'
+  action:
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Confort"
+#Lunch back eco
+- id: kitchen lunch back eco
+  alias: "kitchen lunch back eco"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '13:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.at_home
+      state: 'on'
+    - condition: time
+      after: '13:00:00'
+      before: '18:00:00'
+  action:
+    - delay: 00:00:03
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Eco"

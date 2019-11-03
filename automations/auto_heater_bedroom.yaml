@@ -23,6 +23,7 @@
       after: '06:00:00'
       before: '08:00:00'
   action:
+    - delay: 00:00:09
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_bedroom
@@ -47,6 +48,7 @@
       after: '08:00:00'
       before: '19:00:00'
   action:
+    - delay: 00:00:09
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_bedroom
@@ -71,31 +73,8 @@
       after: '19:00:00'
       before: '23:00:00'
   action:
+    - delay: 00:00:09
     - service: input_select.select_option
       data_template:
         entity_id: input_select.heater_bedroom
         option: "Confort"
-
-- id: bedroom night
-  alias: "bedroom night"
-  hide_entity: true
-  trigger:
-    - platform: time
-      at: '23:00:00'
-    - platform: state
-      entity_id: input_boolean.run_heaters_automations
-      to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.run_heaters_automations
-      state: 'on'
-    - condition: time
-      after: '23:00:00'
-      before: '06:00:00'
-  action:
-    - service: input_select.select_option
-      data_template:
-        entity_id: input_select.heater_bedroom
-        option: "Eco"

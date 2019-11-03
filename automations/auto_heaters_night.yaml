@@ -1,0 +1,67 @@
+#Heaters
+
+#
+#Basic day / night
+#
+
+#Eco for the night
+- id: heaters night
+  alias: "heaters night"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '23:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: time
+      after: '23:00:00'
+      before: '06:00:00'
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_living_room
+        option: "Eco"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_kitchen
+        option: "Eco"
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_bedroom
+        option: "Eco"
+
+#Eco for the night office
+- id: heater office night
+  alias: "heater office night"
+  hide_entity: true
+  trigger:
+    - platform: time
+      at: '23:00:00'
+    - platform: state
+      entity_id: input_boolean.run_heaters_automations
+      to: 'on'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.run_heaters_automations
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.disable_automation_heater_office
+      state: 'off'
+    - condition: time
+      after: '23:00:00'
+      before: '06:00:00'
+  action:
+    - delay: 00:00:06
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.heater_office
+        option: "Eco"
