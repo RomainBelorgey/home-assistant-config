@@ -72,19 +72,6 @@ logbook:
     entities:
       - automation.change_heater_status
       - automation.change_all_heaters_status
-      - automation.cover_mqtt_button1_off_up
-      - automation.cover_mqtt_button2_off_down
-      - automation.cover_timer_stopped
-      - automation.cover_mqtt_button1_on_up
-      - automation.cover_mqtt_button2_on_down
-      - automation.cover_position_up
-      - automation.cover_position_down
-      - automation.cover_set_position_down
-      - automation.cover_set_position_up
-      - input_number.window_set_position
-      - input_number.window_position
-      - timer.window_up
-      - timer.window_down
 
 # Enables a map showing the location of tracked devices
 map:
@@ -102,13 +89,6 @@ google:
   client_secret: !secret google_client_secret
   track_new_calendar: false
 
-# Timer to open cover
-timer:
-  window_up:
-    duration: '00:00:27'
-  window_down:
-    duration: '00:00:27'
-
 notify:
   - name: user01_telegram
     platform: telegram
@@ -123,6 +103,9 @@ cloud:
 
 #MQTT
 mqtt:
+  broker: 192.168.90.130
+  port: "1883"
+  username: mqtt
   password: !secret mqtt_password
 
 weather:
@@ -137,7 +120,7 @@ weather:
 automation: !include_dir_merge_list automations
 input_select: !include_dir_merge_named inputs/select
 input_boolean: !include_dir_merge_named inputs/boolean
-input_number: !include_dir_merge_named inputs/number
+#input_number: !include_dir_merge_named inputs/number
 switch: !include_dir_merge_list switchs
 sensor: !include_dir_merge_list sensors
 binary_sensor: !include_dir_merge_list binary_sensors
