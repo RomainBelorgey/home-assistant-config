@@ -1,6 +1,5 @@
 ##Living room heater
 #- alias: Change heater status living room
-#  hide_entity: true
 #  trigger:
 #    platform: state
 #    entity_id: input_select.heater_living_room
@@ -24,7 +23,6 @@
 #
 ##Kitchen room heater
 #- alias: Change heater status kitchen
-#  hide_entity: true
 #  trigger:
 #    platform: state
 #    entity_id: input_select.heater_kitchen
@@ -48,7 +46,6 @@
 #
 ##Office room heater
 #- alias: Change heater status office
-#  hide_entity: true
 #  trigger:
 #    platform: state
 #    entity_id: input_select.heater_office
@@ -72,7 +69,6 @@
 #
 ##bedroom heater
 #- alias: Change heater status bedroom
-#  hide_entity: true
 #  trigger:
 #    platform: state
 #    entity_id: input_select.heater_bedroom
@@ -96,7 +92,6 @@
 
 #Change all heaters
 - alias: Change all heaters status
-  hide_entity: true
   trigger:
     platform: state
     entity_id: input_select.all_heaters

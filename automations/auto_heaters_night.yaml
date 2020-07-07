@@ -7,7 +7,6 @@
 #Eco for the night
 - id: heaters night
   alias: "heaters night"
-  hide_entity: true
   trigger:
     - platform: time
       at: '23:00:00'
@@ -40,7 +39,6 @@
 #Eco for the night office
 - id: heater office night
   alias: "heater office night"
-  hide_entity: true
   trigger:
     - platform: time
       at: '23:00:00'

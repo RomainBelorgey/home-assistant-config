@@ -6,7 +6,6 @@
 
 - id: bedroom morning confort
   alias: "bedroom morning confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '06:00:00'
@@ -31,7 +30,6 @@
 
 - id: bedroom morning back eco
   alias: "bedroom morning back eco"
-  hide_entity: true
   trigger:
     - platform: time
       at: '08:00:00'
@@ -56,7 +54,6 @@
 
 - id: bedroom evening confort
   alias: "bedroom evening confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '19:00:00'

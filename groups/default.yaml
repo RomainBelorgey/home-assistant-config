@@ -1,5 +1,4 @@
 default_view_test:
-  view: yes
   icon: mdi:home
   name: home test
   entities:
@@ -23,13 +22,11 @@ modes:
     - input_boolean.winter_mode
 
 media_view:
-  view: yes
   icon: mdi:television-classic
   entities:
     - group.media
 
 weather:
-  view: yes
   icon: mdi:weather-cloudy
   entities:
     - weather.weather_hourly
@@ -55,7 +52,6 @@ washer:
     - switch.switch_washer
 
 heaters_view:
-  view: yes
   name: heaters view
   icon: mdi:radiator
   entities:
@@ -114,13 +110,11 @@ xiaomi:
 automation_view:
   name: Automation
   icon: mdi:robot
-  view: yes
   entities:
     - group.all_automations
     - group.all_scripts
 
 view_all:
-  view: yes
   icon: mdi:alert
   name: All devices
   entities:

@@ -7,7 +7,6 @@
 #Confort for return home
 - id: office evening confort
   alias: "office evening confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '17:00:00'
@@ -43,7 +42,6 @@
 #Morning confort all day at home
 - id: office morning confort allday
   alias: "office morning confort allday"
-  hide_entity: true
   trigger:
     - platform: time
       at: '06:00:00'

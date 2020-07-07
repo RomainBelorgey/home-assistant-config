@@ -7,7 +7,6 @@
 #Morning confort not at home
 - id: living morning confort
   alias: "living morning confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '06:00:00'
@@ -35,7 +34,6 @@
 #Back to eco | not at home
 - id: living morning back eco
   alias: "living morning back eco"
-  hide_entity: true
   trigger:
     - platform: time
       at: '09:00:00'
@@ -63,7 +61,6 @@
 #Confort for return home
 - id: living evening confort
   alias: "living evening confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '17:00:00'
@@ -95,7 +92,6 @@
 #Morning confort all day at home
 - id: living morning confort allday
   alias: "living morning confort allday"
-  hide_entity: true
   trigger:
     - platform: time
       at: '06:00:00'

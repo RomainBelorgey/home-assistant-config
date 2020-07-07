@@ -1,3 +1,4 @@
 - platform: samsungtv
   host: !secret tv_ip
+  port: 8001
   name: Tv

@@ -7,7 +7,6 @@
 #Morning confort not at home
 - id: kitchen morning confort
   alias: "kitchen morning confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '06:00:00'
@@ -32,7 +31,6 @@
 #Back to eco | not at home
 - id: kitchen morning back eco
   alias: "kitchen morning back eco"
-  hide_entity: true
   trigger:
     - platform: time
       at: '08:00:00'
@@ -58,7 +56,6 @@
 #Confort for return home
 - id: kitchen evening confort
   alias: "kitchen evening confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '18:00:00'
@@ -84,7 +81,6 @@
 #Back to eco
 - id: kitchen evening eco
   alias: "kitchen evening eco"
-  hide_entity: true
   trigger:
     - platform: time
       at: '20:00:00'
@@ -114,7 +110,6 @@
 #Lunch confort
 - id: kitchen lunch confort
   alias: "kitchen lunch confort"
-  hide_entity: true
   trigger:
     - platform: time
       at: '11:00:00'
@@ -142,7 +137,6 @@
 #Lunch back eco
 - id: kitchen lunch back eco
   alias: "kitchen lunch back eco"
-  hide_entity: true
   trigger:
     - platform: time
       at: '13:00:00'

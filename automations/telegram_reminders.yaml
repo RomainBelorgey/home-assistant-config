@@ -1,6 +1,5 @@
 - id: 'telegramremoveinline'
   alias: 'Telegram callback to remove keyboard'
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
@@ -19,7 +18,6 @@
 
 - id: 'telegramrepeat30m'
   alias: 'Telegram callback to repeat message in 30 minutes'
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
@@ -46,7 +44,6 @@
 
 - id: 'telegramrepeat1h'
   alias: 'Telegram callback to repeat message in 1 hour'
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
@@ -73,7 +70,6 @@
 
 - id: 'telegramrepeat3h'
   alias: 'Telegram callback to repeat message in 3 hours'
-  hide_entity: true
   trigger:
     platform: event
     event_type: telegram_callback
