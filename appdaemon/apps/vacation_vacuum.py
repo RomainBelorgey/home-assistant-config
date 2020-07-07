@@ -23,4 +23,5 @@ class VacationVacuum(hass.Hass):
             self.run_at(self.run_vacuum, event)
 
     def run_vacuum(self, kwargs):
-        self.call_service('vacuum/start', entity_id='vacuum.xiaomi_vacuum_cleaner')
+        self.call_service('vacuum/start', entity_id='vacuum.vacuum_down')
+        self.call_service('vacuum/start', entity_id='vacuum.vacuum_up')

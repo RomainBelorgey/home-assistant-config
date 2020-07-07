@@ -2,7 +2,7 @@
   host: !secret xiaomi_vacuum_ip
   token: !secret xiaomi_vacuum_token
   name: Vacuum_up
-- platform: xiaomi_miio
+- platform: miio2
   host: !secret xiaomi_vacuum_mop_ip
   token: !secret xiaomi_vacuum_mop_token
   name: Vacuum_down
