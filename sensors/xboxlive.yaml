@@ -1,6 +1,0 @@
-- platform: xbox_live
-  api_key: !secret xboxapi_token
-  xuid:
-    - "2533274797754292" #shadowmario
-    - "2533274802721734" #mess90b
-    - "2533274799252153" #violetb
