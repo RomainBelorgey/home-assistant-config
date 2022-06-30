@@ -1,0 +1,17 @@
+- id: 'close at night'
+  alias: Cover close at night
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -2.05
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: cover.all
+      state: open
+  action:
+  - service: cover.close_cover
+    data:
+      entity_id: cover.all

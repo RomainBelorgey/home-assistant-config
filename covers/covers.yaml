@@ -1,0 +1,64 @@
+- platform: group
+  name: Velux
+  entities:
+    - cover.velux_hall
+    - cover.velux_bathroom
+    - cover.velux_office
+    - cover.velux_bedroom
+
+- platform: group
+  name: Velux north
+  entities:
+    - cover.velux_hall
+    - cover.velux_bedroom
+
+- platform: group
+  name: Velux south
+  entities:
+    - cover.velux_bathroom
+    - cover.velux_office
+
+- platform: group
+  name: Bedroom
+  entities:
+    - cover.bedroom_left
+    - cover.bedroom_right
+
+- platform: group
+  name: East
+  entities:
+    - cover.bedroom_east_left
+    - cover.bedroom_east_right
+
+- platform: group
+  name: West
+  entities:
+    - cover.salon_west
+    - cover.kitchen_west
+    - cover.office
+    - cover.bedroom_left
+    - cover.bedroom_right
+
+- platform: group
+  name: Salon south
+  entities:
+    - cover.salon_south_right
+    - cover.salon_south_left
+
+- platform: group
+  name: all
+  entities:
+    - cover.velux_hall
+    - cover.velux_bathroom
+    - cover.velux_office
+    - cover.velux_bedroom
+    - cover.office
+    - cover.bedroom_left
+    - cover.bedroom_right
+    - cover.bedroom_east_left
+    - cover.bedroom_east_right
+    - cover.kitchen_west
+    - cover.kitchen_north
+    - cover.salon_west
+    - cover.salon_south_right
+    - cover.salon_south_left
