@@ -1,5 +1,5 @@
-- platform: xiaomi_miio
-  host: !secret xiaomi_fan_ip
-  token: !secret xiaomi_fan_token
+#- platform: xiaomi_miio
+#  host: !secret xiaomi_fan_ip
+#  token: !secret xiaomi_fan_token
 
 

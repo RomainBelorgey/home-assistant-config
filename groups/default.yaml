@@ -44,12 +44,18 @@ sensors_interior:
     - sensor.air_quality_livingroom
     - sensor.humidity_livingroom
     - sensor.temp_livingroom
+    - sensor.living_room_temperature
+    - sensor.living_room_humidity
+    - sensor.bedroom_temperature
+    - sensor.bedroom_humidity
+    - sensor.bureau_temperature
+    - sensor.bureau_humidity
 
 washer:
   name: washer
   entities:
     - sensor.washer
-    - switch.switch_washer
+    - switch.washer_washer
 
 heaters_view:
   name: heaters view
@@ -86,8 +92,6 @@ heaters_automations:
     - automation.kitchen_lunch_back_eco
     - automation.office_evening_confort
     - automation.office_morning_confort_allday
-    - automation.out_heaters_eco
-    - automation.out_heaters_back
     - automation.heaters_night
     - automation.heater_office_night
 

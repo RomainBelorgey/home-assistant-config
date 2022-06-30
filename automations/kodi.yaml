@@ -1,10 +1,23 @@
-- id: kodi switch stop
-  alias: "Kodi : socket off if shutdown"
+- id: kodi switch off with yamaha
+  alias: "Kodi switch off if yamaha stop"
   trigger:
     platform: state
-    entity_id: media_player.kodi
+    entity_id: media_player.yamaha
     to: 'off'
   action:
-  - delay: 00:00:02
-  - service: switch.turn_off
-    entity_id: switch.switch_kodi
+    - delay: 00:00:05
+    - service: switch.turn_off
+      entity_id: switch.kodi_switch
+
+- id: kodi switch off
+  alias: "Kodi: switch off"
+  trigger:
+    - platform: device
+      device_id: !secret kodi_device_id
+      domain: kodi
+      entity_id: media_player.kodi
+      type: turn_off
+  action:
+    - delay: 00:00:02
+    - service: switch.turn_off
+      entity_id: switch.kodi_switch

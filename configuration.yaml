@@ -30,15 +30,6 @@ recorder:
 # http:
 #   base_url: example.duckdns.org:8123
 
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
 # Discover some devices automatically
 #discovery:
 
@@ -101,9 +92,12 @@ tts:
 # Cloud
 cloud:
 
+#Android
+mobile_app:
+
 #MQTT
 mqtt:
-  broker: 192.168.90.130
+  broker: !secret homeassistant_ip
   port: "1883"
   username: mqtt
   password: !secret mqtt_password

@@ -6,13 +6,9 @@
   condition:
     condition: and
     conditions:
-    - condition: time
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
     - condition: state
       entity_id: calendar.vacation
       state: 'off'

@@ -1,10 +1,2 @@
 - platform: kodi
   host: !secret kodi_ip
-  turn_on_action:
-  - service: switch.turn_on
-    entity_id: switch.switch_kodi
-  turn_off_action:
-  - service: media_player.kodi_call_method
-    data:
-      entity_id: media_player.kodi
-      method: System.Shutdown

@@ -9,6 +9,9 @@
     condition: or
     conditions:
     - condition: state
+      entity_id: 'input_boolean.wfh'
+      state: 'on'
+    - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'off'
     - condition: state
@@ -30,6 +33,9 @@
   condition:
     condition: or
     conditions:
+    - condition: state
+      entity_id: 'input_boolean.wfh'
+      state: 'on'
     - condition: state
       entity_id: 'binary_sensor.workday_sensor'
       state: 'off'

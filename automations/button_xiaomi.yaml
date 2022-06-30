@@ -8,34 +8,34 @@
     event_data:
       entity_id: binary_sensor.switch_158d00020b6539
       click_type: long_click_press
-  condition:
-  - condition: state
-    entity_id: media_player.kodi
-    state: 'off'
+  #condition:
+  #- condition: state
+  #  entity_id: media_player.kodi
+  #  state: 'off'
   action:
-    service: media_player.turn_on
-    entity_id: media_player.kodi
+    service: switch.turn_on
+    entity_id: switch.kodi_switch
 
-- id: 'stop kodi'
-  alias: Stop kodi
-  trigger:
-    platform: event
-    event_type: xiaomi_aqara.click
-    event_data:
-      entity_id: binary_sensor.switch_158d00020b6539
-      click_type: long_click_press
-  condition:
-    condition: template
-    value_template: "{{ states.media_player.kodi != 'off' }}"
-  action:
-  - service: media_player.turn_off
-    entity_id: media_player.kodi
-  - delay: 00:00:02
-  - service: media_player.turn_off
-    entity_id: media_player.yamaha
-  - delay: 00:00:02
-  - service: media_player.turn_off
-    entity_id: media_player.tv
+#- id: 'stop kodi'
+#  alias: Stop kodi
+#  trigger:
+#    platform: event
+#    event_type: xiaomi_aqara.click
+#    event_data:
+#      entity_id: binary_sensor.switch_158d00020b6539
+#      click_type: long_click_press
+#  condition:
+#    condition: template
+#    value_template: "{{ states.media_player.kodi != 'off' }}"
+#  action:
+#  - service: media_player.turn_off
+#    entity_id: media_player.kodi
+#  - delay: 00:00:02
+#  - service: media_player.turn_off
+#    entity_id: media_player.yamaha
+#  - delay: 00:00:02
+#  - service: media_player.turn_off
+#    entity_id: media_player.tv
 
 #double = pause kodi
 - id: 'play pause kodi'
