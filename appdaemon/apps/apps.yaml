@@ -5,9 +5,9 @@ telegram:
 vacation_vacuum:
   module: vacation_vacuum
   class: VacationVacuum
-washer_sensor:
-  module: washer_sensor
-  class: WasherSensor
-heater:
-  module: heaters
-  class: Heaters
+#washer_sensor:
+#  module: washer_sensor
+#  class: WasherSensor
+#heater:
+#  module: heaters
+#  class: Heaters

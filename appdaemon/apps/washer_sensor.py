@@ -11,7 +11,7 @@ class WasherSensor(hass.Hass):
         global timestamp_change
         timestamp_change = time.time()
         global new_state
-        self.listen_state(self.change_sensor, 'switch.switch_washer', attribute = 'current_power_w')
+        self.listen_state(self.change_sensor, 'switch.washer_switch', attribute = 'current_power_w')
         new_state = self.get_state("sensor.washer")
 
     def change_sensor(self, entity, attribute, old, new, kwargs):
